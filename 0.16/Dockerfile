@@ -9,12 +9,10 @@ ARG PGID=845
 
 ENV PORT=34197 \
     RCON_PORT=27015 \
-    VERSION=0.16.10 \
-    SHA1=32c61a92beb2a1d224f20d1797e66798a8cc2f42
+    VERSION=0.16.15 \
+    SHA1=2b6fbfb49b47a542efb6b80e07f9c3ef45b0610a
 
-VOLUME /factorio
-
-RUN mkdir -p /opt && \
+RUN mkdir -p /opt /factorio && \
     apk add --update --no-cache pwgen && \
     apk add --update --no-cache --virtual .build-deps curl && \
     curl -sSL https://www.factorio.com/get-download/$VERSION/headless/linux64 \
@@ -29,6 +27,8 @@ RUN mkdir -p /opt && \
     addgroup -g $PGID -S $GROUP && \
     adduser -u $PUID -G $USER -s /bin/sh -SDH $GROUP && \
     chown -R $USER:$GROUP /opt/factorio /factorio
+
+VOLUME /factorio
 
 EXPOSE $PORT/udp $RCON_PORT/tcp
 
