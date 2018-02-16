@@ -9,8 +9,8 @@ ARG PGID=845
 
 ENV PORT=34197 \
     RCON_PORT=27015 \
-    VERSION=0.16.21 \
-    SHA1=0e28dd80ffcbd6ed599bce5672eb3b41349b12db
+    VERSION=0.16.24 \
+    SHA1=49827d99b6d553046f13331f454f41d4d7233475
 
 RUN mkdir -p /opt /factorio && \
     apk add --update --no-cache pwgen && \
@@ -25,7 +25,7 @@ RUN mkdir -p /opt /factorio && \
     ln -s /factorio/mods /opt/factorio/mods && \
     apk del .build-deps && \
     addgroup -g $PGID -S $GROUP && \
-    adduser -u $PUID -G $USER -s /bin/sh -SDH $GROUP && \
+    adduser -u $PUID -G $GROUP -s /bin/sh -SDH $USER && \
     chown -R $USER:$GROUP /opt/factorio /factorio
 
 VOLUME /factorio
