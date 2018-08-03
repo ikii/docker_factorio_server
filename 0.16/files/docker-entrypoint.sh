@@ -1,5 +1,4 @@
 #!/bin/sh -x
-
 set -e
 
 id
@@ -8,6 +7,7 @@ mkdir -p $SAVES
 mkdir -p $CONFIG
 mkdir -p $MODS
 mkdir -p $SCENARIOS
+mkdir -p $SCRIPTOUTPUT
 
 if [ ! -f $CONFIG/rconpw ]; then
   echo $(pwgen 15 1) > $CONFIG/rconpw
@@ -44,4 +44,5 @@ exec /opt/factorio/bin/x64/factorio \
   --server-banlist $CONFIG/server-banlist.json \
   --rcon-port $RCON_PORT \
   --rcon-password "$(cat $CONFIG/rconpw)" \
-  --server-id /factorio/config/server-id.json
+  --server-id /factorio/config/server-id.json \
+  $@

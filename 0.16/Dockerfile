@@ -9,12 +9,13 @@ ARG PGID=845
 
 ENV PORT=34197 \
     RCON_PORT=27015 \
-    VERSION=0.16.38 \
-    SHA1=f59b14685dd215be6dfc5914c16eb63da9444c9b \
+    VERSION=0.16.51 \
+    SHA1=127e7ff484ab263b13615d6114013ce0a66ac929 \
     SAVES=/factorio/saves \
     CONFIG=/factorio/config \
     MODS=/factorio/mods \
-    SCENARIOS=/factorio/scenarios
+    SCENARIOS=/factorio/scenarios \
+    SCRIPTOUTPUT=/factorio/script-output
 
 RUN mkdir -p /opt /factorio && \
     apk add --update --no-cache pwgen && \
@@ -28,6 +29,7 @@ RUN mkdir -p /opt /factorio && \
     ln -s $SAVES /opt/factorio/saves && \
     ln -s $MODS /opt/factorio/mods && \
     ln -s $SCENARIOS /opt/factorio/scenarios && \
+    ln -s $SCRIPTOUTPUT /opt/factorio/script-output && \
     apk del .build-deps && \
     addgroup -g $PGID -S $GROUP && \
     adduser -u $PUID -G $GROUP -s /bin/sh -SDH $USER && \
